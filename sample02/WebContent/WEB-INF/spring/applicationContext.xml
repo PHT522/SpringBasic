@@ -39,9 +39,9 @@
 	</bean>	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
-		<constructor-arg index="1" value="BATCH"/>	<!-- BATCH 타입 뭔가 문제가있다 -->
+		<constructor-arg index="1" value="SIMPLE"/>		
 	</bean>
-	
+	<!-- <constructor-arg index="1" value="BATCH"/> -->	<!-- BATCH 타입 리턴값 문제가있다(쓰레기값존재)  -->
 	
 	<!-- jdbc 설정 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
