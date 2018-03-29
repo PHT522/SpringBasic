@@ -8,9 +8,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="./css/style.css" type="text/css" >
+<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./js/jquery.tablesorter.min.js"></script>
 <title>bbslist.jsp</title>
  
-<style type="text/css">
+<!-- <style type="text/css">
 table{
 	border-collapse: collapse; 
 }
@@ -30,7 +33,7 @@ th{
 	color: black; 
 }
 
-</style>
+</style> -->
 
 </head>
 <body>
@@ -75,13 +78,14 @@ public String arrow(int depth){
 List<BbsDto> bbslist = (List<BbsDto>)request.getAttribute("bbslist");
 %>
 
-<table border="1">
-<col width="70"><col width="500"><col width="150">
+<table id="bbslist" class="tablesorter">
 
+<thead>
 <tr>
 <th>순서</th><th>제목</th><th>작성자</th>	
 </tr>
-
+</thead>
+<tbody>
 <%
 if(bbslist == null || bbslist.size() == 0){
 	%>
@@ -110,10 +114,37 @@ for(int i = 0;i < bbslist.size(); i++){
 	<%
 }
 %>
+</tbody>
 </table>
 
 
 <a href="bbswrite.do">글쓰기</a>
+
+
+<script type="text/javascript">
+$(function() {
+	
+	//기본테이블정렬
+	//$("#bbslist").tablesorter();
+	
+	//정렬 해제//
+	  $("#bbslist").tablesorter({
+		headers: {
+			0: { sorter: false } ,			
+			2: { sorter: false }
+		}
+	});
+	
+	//강제 정렬//
+	/* 	$("#bbslist").tablesorter({ 
+			sortForce: [[2,0]] 
+		});  */
+});
+
+
+
+
+</script>
 
 </body>
 </html>
