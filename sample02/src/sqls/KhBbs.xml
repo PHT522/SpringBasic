@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="KhBbs">
+
+<select id="getBbsList" resultType="kh.com.a.model.BbsDto">
+	SELECT SEQ, ID, REF, STEP, DEPTH,
+		TITLE, CONTENT, WDATE, PARENT, DEL, READCOUNT
+	FROM BBS
+	ORDER BY REF DESC, STEP ASC
+</select>
+
+<!-- write -->
+<insert id="bbswriteAf" parameterType="kh.com.a.model.BbsDto">
+	INSERT INTO BBS(SEQ, ID, REF, STEP, DEPTH,
+		TITLE, CONTENT, WDATE, PARENT, DEL, READCOUNT )
+	VALUES(SEQ_BBS.NEXTVAL, #{id}, (SELECT NVL(MAX(REF),0)+1 FROM BBS), 0, 0,
+		#{title}, #{content}, SYSDATE, 0, 0, 0)
+</insert>
+
+<!-- bbsdetail -->
+<select id="bbsdetail" parameterType="java.lang.Integer" resultType="kh.com.a.model.BbsDto">
+	SELECT SEQ, ID, REF, STEP, DEPTH,
+		TITLE, CONTENT, WDATE, PARENT, DEL, READCOUNT
+	FROM BBS
+	WHERE SEQ=#{seq}
+</select>
+
+<!-- update -->
+<update id="bbsupdate" parameterType="kh.com.a.model.BbsDto">
+	UPDATE BBS 
+	SET TITLE=#{title}, CONTENT=#{content}
+	WHERE SEQ=#{seq}
+</update>
+
+<!-- delete -->
+<update id="bbsdelete" parameterType="java.lang.Integer">
+	UPDATE BBS 
+	SET DEL=1
+	WHERE SEQ=#{seq}
+
+</update>
+
+
+</mapper>

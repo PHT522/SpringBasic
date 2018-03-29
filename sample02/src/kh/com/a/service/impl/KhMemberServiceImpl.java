@@ -19,9 +19,16 @@ public class KhMemberServiceImpl implements KhMemberService {
 	}
 
 	@Override
-	public boolean idcheck(String id) throws Exception {
-		return khMemberDao.idcheck(id);
+	public MemberDto login(MemberDto mem) throws Exception {
+		return khMemberDao.login(mem);
 	}
+
+	/*@Override
+	public boolean logout(String id) throws Exception {
+		return khMemberDao.logout(id);
+	}
+*/
+	
 	
 	
 }

@@ -25,13 +25,17 @@ public class KhMemberDaoImpl implements KhMemberDao {
 		return n>0?true:false;
 	}
 
+	
 	@Override
-	public boolean idcheck(String id) throws Exception {
-			
-		int n = sqlSession.selectOne(namespace + "idcheck", id);
-		
-		return n>0?true:false;
+	public MemberDto login(MemberDto mem) throws Exception {
+		return sqlSession.selectOne(namespace+"login", mem);
 	}
+
+/*
+	@Override
+	public boolean logout(String id) throws Exception {		
+		return sqlSession.selectOne(namespace+"logout", id);
+	}*/
 	
 	
 	

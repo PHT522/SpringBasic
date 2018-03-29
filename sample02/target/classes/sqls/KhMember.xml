@@ -10,11 +10,11 @@
 	VALUES(#{id}, #{pwd}, #{name}, #{email}, 3)
 </insert>
 
-<select id="idcheck" parameterType="java.lang.String" 
+<select id="login" parameterType="kh.com.a.model.MemberDto" 
 		resultType="kh.com.a.model.MemberDto">
-	SELECT ID, PWD,NAME, EMAIL, AUTH
+	SELECT ID, NAME, EMAIL, AUTH
 	FROM MEMBER
-	WHERE ID=#{id}
+	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
 
 
